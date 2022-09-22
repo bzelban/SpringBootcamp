@@ -26,8 +26,7 @@ public class Main {
 		product3.setUnitPrice(7500);
 		product3.setUnitsInStock(3);
 		product3.setImageUrl("image3.jpg");
-		
-		
+
 		Product[] products = { product1, product2, product3 };
 
 		System.out.println("<ul>");
@@ -35,21 +34,21 @@ public class Main {
 			System.out.println("<li>" + product.getName() + "</li>");
 		}
 		System.out.println("</ul>");
-		
+
 		IndividualCustomer individualCustomer = new IndividualCustomer();
 		individualCustomer.setId(1);
 		individualCustomer.setPhone("05431234567");
 		individualCustomer.setCustomerNumber("987123");
 		individualCustomer.setFirstName("Engin");
 		individualCustomer.setLastName("Demiroğ");
-		
+
 		CorporateCustomer corporateCustomer = new CorporateCustomer();
 		corporateCustomer.setId(2);
 		corporateCustomer.setPhone("543254325");
 		corporateCustomer.setCustomerNumber("123123123");
 		corporateCustomer.setCompanyName("Kodlama.io");
 		corporateCustomer.setTaxNumber("124124512");
-		
+
 		// Example of Polymorphism
 		Customer[] customers = { individualCustomer, corporateCustomer };
 	}
