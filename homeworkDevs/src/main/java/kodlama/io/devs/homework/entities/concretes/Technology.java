@@ -1,19 +1,16 @@
 package kodlama.io.devs.homework.entities.concretes;
 
-
-import java.util.List;
-
 import javax.persistence.*;
-
 import lombok.*;
 
 
-@Table(name="Languages")
+@Table(name="technologies")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Language {
+public class Technology {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
@@ -22,7 +19,8 @@ public class Language {
 	@Column(name="name")
 	private String name;
 	
-	@OneToMany(mappedBy="language")
-	private List<Technology> technologies;
+	@ManyToOne
+	@JoinColumn(name = "languageId")
+	private Language language;
 
 }

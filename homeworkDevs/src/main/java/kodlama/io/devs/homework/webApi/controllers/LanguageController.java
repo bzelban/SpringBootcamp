@@ -2,47 +2,53 @@ package kodlama.io.devs.homework.webApi.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import kodlama.io.devs.homework.dataAccess.concretes.InMemoryLanguageRepository;
-import kodlama.io.devs.homework.entities.concretes.Language;
+import kodlama.io.devs.homework.business.abstracts.LanguagesService;
+import kodlama.io.devs.homework.business.requests.CreateLanguageRequest;
+import kodlama.io.devs.homework.business.requests.UpdateLanguageRequest;
+import kodlama.io.devs.homework.business.responses.GetAllLanguageResponse;
+//import kodlama.io.devs.homework.entities.concretes.Language;
 
 @RestController
 @RequestMapping("/api/language")
 public class LanguageController {
-
 	
-	@Autowired
-	InMemoryLanguageRepository controlAction;
+	private LanguagesService languageService;
+	
+	public LanguageController(LanguagesService languageService) {
+		this.languageService = languageService;
+	}
+
 	
 	
 	@GetMapping
-	public List<Language> getAllLanguages(){
-		return controlAction.getAll();
+	public List<GetAllLanguageResponse> getAllLanguages(){
+		return languageService.getAll();
 	}
 	
 	@PostMapping("/add")
-	public void addLanguage(@RequestBody String name){
-		controlAction.addLanguage(name);
+	public void addLanguage(@RequestBody CreateLanguageRequest createLanguageRequest){
+		languageService.add(createLanguageRequest);
 	}
 		
 	
 	
 	@DeleteMapping("/{id}")
 	public void deleteLanguage(@PathVariable int id) {
-		controlAction.deleteLanguage(id);
+		languageService.delete(id);
 		
 	}
 	
 	@PostMapping("/{id}")
-	public void updateLanguage(@PathVariable int id, @RequestBody String name) {
-		controlAction.updateLanguage(id, name);
+	public void updateLanguage(@PathVariable int id, @RequestBody UpdateLanguageRequest updateLanguageRequest) {
+		languageService.update(updateLanguageRequest, id);
 	}
 	
-	@GetMapping("/{id}")
-	public Language getLanguageId(@PathVariable int id) {
-		return controlAction.getLanguageById(id);
-	}
+//	@GetMapping("/{id}")
+//	public Language getLanguageId(@PathVariable int id) {
+//		return controlAction.getLanguageById(id);
+//	}
 	
 }
